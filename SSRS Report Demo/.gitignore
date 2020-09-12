@@ -1,0 +1,30 @@
+###################
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+*.suo
+###############
+# Directories #
+###############
+/.vs/*
+/lib/*
+/MediaFiles/*
+/packages/*
+/Publish/*
+/SSRS Report Demo/obj/*
+/SSRS Report Demo/bin/*
+
+bin/*
+obj/*
+[Bb]in/
+[Oo]bj/
+*.Publish.xml
+*.log
+*.user
+*.[Cc]ache
