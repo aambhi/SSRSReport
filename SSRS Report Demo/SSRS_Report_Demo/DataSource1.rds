@@ -3,6 +3,7 @@
   <ConnectionProperties>
     <Extension>SQL</Extension>
     <ConnectString>Data Source=AGSHLP-A4472;Initial Catalog=T0002</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>19afc47d-522b-426c-8898-d2f88b12eb47</DataSourceID>
 </RptDataSource>

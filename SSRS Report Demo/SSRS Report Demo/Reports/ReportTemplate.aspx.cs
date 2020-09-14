@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -17,25 +19,25 @@ namespace SSRS_Report_Demo.Reports
             {
                 try
                 {
-                    string UserName = ConfigurationManager.AppSettings["SSRSUserName"];
-                    string Password = ConfigurationManager.AppSettings["SSRSPassword"];
 
                     String reportFolder = System.Configuration.ConfigurationManager.AppSettings["SSRSReportsFolder"].ToString();
 
                     rvSiteMapping.Height = Unit.Pixel(Convert.ToInt32(Request["Height"]) - 58);
                     rvSiteMapping.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Remote;
-                    IReportServerCredentials irsc = new CustomReportCredentials(UserName, Password, "agsindia.com");
-                    rvSiteMapping.ServerReport.ReportServerCredentials = irsc;
-
-                    rvSiteMapping.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer"); // Add the Reporting Server URL  
+                    rvSiteMapping.ServerReport.ReportServerUrl = new Uri("http://localhost/ReportServer");
                     rvSiteMapping.ServerReport.ReportPath = String.Format("/{0}/{1}", reportFolder, Request["ReportName"].ToString());
 
+                    List<ReportParameter> parameters = new List<ReportParameter>();
+                    parameters.Add(new ReportParameter("NextValue", "0"));
+                    rvSiteMapping.ServerReport.SetParameters(parameters);
+                    rvSiteMapping.ShowParameterPrompts = false;
+                    rvSiteMapping.ShowPromptAreaButton = false;
                     rvSiteMapping.ServerReport.Refresh();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    throw ex;
                 }
             }
         }
